@@ -1,0 +1,41 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std;
+
+bool isPrime(int num);
+
+int main () {
+	int n;
+	int count = 0;
+
+	cin >> n;
+
+	vector<int> numbers(n);
+
+	for (int i = 0; i < n; i++) {
+		cin >> numbers[i];
+	}
+
+	for (int i = 0; i < n; i++) {
+		if (isPrime(numbers[i]) == 1) {
+			count++;
+		}
+	}
+	cout << count << endl;
+}
+
+bool isPrime(int num) {
+	int	prime_count = 0;
+
+	if (num == 1)
+		return (0);
+	if (num == 2 || num == 3)
+		return (1);
+	for (int i = 2; i <= num / i; i++) {
+		if (num % i == 0) {
+			return (0);
+		}
+	}
+	return (1);
+}
