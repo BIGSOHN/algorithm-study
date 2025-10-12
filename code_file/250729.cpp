@@ -1,0 +1,88 @@
+/*
+재귀(들어온 수, 갯수) {
+	재귀 (들어온 수 - 5, 갯수 + 1) , 재귀 (들어온 수 - 3, 갯수 + 1)
+	if (들어온 수 != 0 && 들어온 수 < 3) {
+	return (0) // 만약에 다 0이면 -1 출력
+	} else if (들어온 수 == 0) {
+	 return (갯수)
+	}
+}
+
+재귀는 메모리 초과가 나옴..!! 코드
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int Five = 5;
+int Three = 3;
+
+int reculsiveCnt(int N, int cnt, vector<int> &cntArr);
+
+int main () {
+	vector<int> cntArr;
+	int N;
+	int cnt = 0;
+	int result;
+
+	cin >> N;
+	result = reculsiveCnt(N, cnt, cntArr);
+	if (result == 0) {
+		cout << "-1\n";
+	} else {
+		cout << *min_element(cntArr.begin(), cntArr.end()) << '\n';
+	}
+	return (0);
+}
+
+int reculsiveCnt(int N, int cnt, vector<int> &cntArr) {
+	if (N == 0) {
+		cntArr.push_back(cnt);
+		return (cnt);
+	}
+	if (N != 0 && N < Three) {
+		return (0);
+	}
+	return (reculsiveCnt(N - Five, cnt + 1, cntArr) + reculsiveCnt(N - Three, cnt + 1, cntArr));
+}
+*/
+
+#include <iostream>
+#include <climits>
+
+using namespace std;
+
+
+int main () {
+	
+	int N;
+	cin >> N;
+
+	int min_bags = INT_MAX;
+	int remaining;
+	int total_bags;
+
+	for (int five_bags = 0; five_bags <= N / 5; five_bags++) {
+		int remaining = N - (five_bags * 5);
+
+		if (remaining % 3 == 0) {
+			int three_bags = remaining / 3;
+			total_bags = five_bags + three_bags;
+
+			if (total_bags < min_bags) {
+				min_bags = total_bags;
+			}
+		}
+	}
+
+	if (min_bags == INT_MAX) {
+		cout << -1 << '\n';
+	} else {
+		cout << min_bags << '\n';
+	}
+
+	return (0);
+}
+
